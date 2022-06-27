@@ -61,11 +61,25 @@ jobs:
           pwd
           ls -la
 
-      - name: Push DEV container to docker hub
-        uses: mr-smithers-excellent/docker-build-push@v5
+      # - name: Push DEV container to docker hub
+      #   uses: mr-smithers-excellent/docker-build-push@v5
+      #   with:
+      #     image: $IMAGE_NAME
+      #     tags: ${{ format('{0}-{1}', env.IMAGE_TAG, 'latest') }}
+      #     registry: acrazewtmaeu0001dapodm.azurecr.io
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v1
         with:
-          image: $IMAGE_NAME
-          tags: ${{ format('{0}-{1}', env.IMAGE_TAG, 'latest') }}
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: acrazewtmaeu0001dapodm.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build docker image
+        run: |
+          docker build -t springboot-k8s-yaml-main:1.0 .
+          docker images
+          docker push acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:1.0
+
