@@ -9,3 +9,4 @@ spec:
   ports:
     - port: 8080 # The port that the service is running on in the cluster
       
+# kubectl get svc springboot-k8s-svc --watch -n dap-dev
