@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: spring-boot-k8s
-          image: acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:1.0 # Image that will be used to containers in the cluster
-          imagePullPolicy: IfNotPresent
+          image: acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:2.0 # Image that will be used to containers in the cluster
+          imagePullPolicy: Always
           env:
           
           - name: DB_TYPE
@@ -38,7 +38,7 @@ spec:
               secretKeyRef:
                 name: sql-db-secret
                 key: db-password
-                
+
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
           resources:
