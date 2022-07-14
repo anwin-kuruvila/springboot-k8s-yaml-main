@@ -62,8 +62,8 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build -t springboot-k8s-yaml-main:1.0 .
+          docker build -t springboot-k8s-yaml-main:${{ env.AZ_AKS_NAME }} .
           docker images
-          docker tag springboot-k8s-yaml-main:1.0 acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:1.0
-          docker push acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:1.0
+          docker tag springboot-k8s-yaml-main:${{ env.AZ_AKS_NAME }} acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:${{ env.AZ_AKS_NAME }}
+          docker push acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:${{ env.AZ_AKS_NAME }}
 
