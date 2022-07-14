@@ -1,5 +1,7 @@
 package com.javatechie.k8s;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,18 @@ public class SpringbootK8sDemoApplication {
 
 	@GetMapping("/message")
 	public String displayMessage(){
-		return "Congratulation you successfully deployed your application to kubernetes !!";
+		
+		ArrayList<String> envVars = new ArrayList<String>();
+		envVars.add(System.getenv("DB_TYPE"));
+		envVars.add(System.getenv("DB_SERVER_NAME"));
+		envVars.add(System.getenv("DB_PORT_NUMBER"));
+		envVars.add(System.getenv("DB_NAME"));
+		envVars.add(System.getenv("DB_USER"));
+		envVars.add(System.getenv("DB_PASSWORD"));
+		
+		System.out.println(envVars);
+		
+		return "ENV vars fetched from container >>>  " + envVars;
 	}
 
 	public static void main(String[] args) {
@@ -19,3 +32,4 @@ public class SpringbootK8sDemoApplication {
 	}
 
 }
+

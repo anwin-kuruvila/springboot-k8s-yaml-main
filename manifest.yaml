@@ -7,6 +7,8 @@ spec:
     matchLabels:
       app: spring-boot-k8s
   replicas: 2 # Number of replicas that will be created for this deployment
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -16,6 +18,27 @@ spec:
         - name: spring-boot-k8s
           image: acrazewtmaeu0001dapodm.azurecr.io/springboot-k8s-yaml-main:1.0 # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
+          env:
+          
+          - name: DB_TYPE
+            value: "sqlserver"
+          - name: DB_SERVER_NAME
+            value: "sqldb-dap-preprod-dev.database.windows.net"
+          - name: DB_PORT_NUMBER
+            value: "1433"
+          - name: DB_NAME
+            value: "odmDB"
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: sql-db-secret
+                key: db-user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql-db-secret
+                key: db-password
+                
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
           resources:
