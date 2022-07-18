@@ -21,6 +21,8 @@ public class SpringbootK8sDemoApplication {
 		envVars.add(System.getenv("DB_NAME"));
 		envVars.add(System.getenv("DB_USER"));
 		envVars.add(System.getenv("DB_PASSWORD"));
+		envVars.add(System.getenv("LOV_KAFKA_DEV_USER"));
+		envVars.add(System.getenv("LOV_KAFKA_SCHEMA_DEV_PASSWORD"));
 		
 		System.out.println(envVars);
 		

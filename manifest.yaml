@@ -27,7 +27,7 @@ spec:
           - name: DB_PORT_NUMBER
             value: "1433"
           - name: DB_NAME
-            value: "odmDB"
+            value: "odmDBDev"
           - name: DB_USER
             valueFrom:
               secretKeyRef:
@@ -38,6 +38,17 @@ spec:
               secretKeyRef:
                 name: sql-db-secret
                 key: db-password
+          - name: LOV_KAFKA_DEV_USER
+            valueFrom:
+              secretKeyRef:
+                name: lov-kafka-dev-secret
+                key: lov-kafka-dev-user
+          - name: LOV_KAFKA_SCHEMA_DEV_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ov-kafka-dev-secret
+                key: lov-kafka-schema-dev-password
+          
 
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
