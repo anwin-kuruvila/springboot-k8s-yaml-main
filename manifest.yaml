@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: spring-boot-k8s
-  replicas: 2 # Number of replicas that will be created for this deployment
+  replicas: 1 # Number of replicas that will be created for this deployment
   strategy:
     type: RollingUpdate
   template:
@@ -46,7 +46,7 @@ spec:
           - name: LOV_KAFKA_SCHEMA_DEV_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: ov-kafka-dev-secret
+                name: lov-kafka-dev-secret
                 key: lov-kafka-schema-dev-password
           
 
